@@ -1,4 +1,5 @@
 // DOM Elements
+console.log("Admin Dashboard Logic v2.1 Loading...");
 const configAlert = document.getElementById('config-alert');
 const btnAlertConfigure = document.getElementById('btn-alert-configure');
 const btnSettingsNav = document.getElementById('btn-settings-nav');
@@ -21,6 +22,9 @@ const btnTestConnection = document.getElementById('btn-test-connection');
 const btnResetDashboard = document.getElementById('btn-reset-dashboard');
 const btnRunDiagnostic = document.getElementById('btn-run-diagnostic');
 const diagnosticResults = document.getElementById('diagnostic-results');
+
+console.log("Diagnostic Button:", btnRunDiagnostic);
+console.log("Diagnostic Results Panel:", diagnosticResults);
 
 // Add Client Elements
 const newClientName = document.getElementById('new-client-name');
@@ -457,6 +461,7 @@ function showToast(message, type = 'success') {
 
 // Start
 btnRunDiagnostic.addEventListener('click', async () => {
+    console.log("Diagnostic Button Clicked");
     diagnosticResults.innerHTML = '<p class="text-muted"><i class="bx bx-loader-alt bx-spin"></i> Running diagnostics...</p>';
     btnRunDiagnostic.disabled = true;
 

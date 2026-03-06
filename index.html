@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandhi Shop - Admin Dashboard</title>
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class='bx bx-shield-plus'></i>
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="#"><i class='bx bx-group'></i> Manage Clients</a></li>
+                <li><a href="#" id="btn-settings-nav"><i class='bx bx-cog'></i> Configuration</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-title">
+                    <h1>Client Management</h1>
+                    <p>Control POS access for all your active clients.</p>
+                </div>
+            </header>
+
+            <!-- Configuration Alert -->
+            <div id="config-alert" class="alert warning" style="display: none;">
+                <i class='bx bx-error'></i>
+                <span>GitHub configuration is missing. Please set your Personal Access Token in Settings to manage
+                    clients.</span>
+                <button class="btn btn-sm btn-outline" id="btn-alert-configure">Configure Now</button>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(138, 43, 226, 0.1); color: #8A2BE2;">
+                        <i class='bx bx-group'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Clients</h3>
+                        <p id="stat-total">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(46, 204, 113, 0.1); color: #2ecc71;">
+                        <i class='bx bx-check-circle'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Licenses</h3>
+                        <p id="stat-active">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: rgba(231, 76, 60, 0.1); color: #e74c3c;">
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Locked Clients</h3>
+                        <p id="stat-inactive">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Actions -->
+            <div class="actions-bar">
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="search-input" placeholder="Search clients...">
+                </div>
+                <button class="btn btn-primary" id="btn-add-client">
+                    <i class='bx bx-plus'></i> Add New Client
+                </button>
+            </div>
+
+            <!-- Client List -->
+            <div class="clients-container">
+                <table class="clients-table">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>6-Digit Secret Code</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clients-table-body">
+                        <!-- Populated dynamically via JS -->
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-20">Loading clients...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div class="modal-overlay" id="add-client-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add New Client</h2>
+                <button class="icon-btn close-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Client / Restaurant Name</label>
+                    <input type="text" id="new-client-name" placeholder="E.g., Ramz Raidan Downtown">
+                </div>
+                <div class="input-group mt-15">
+                    <label>6-Digit Secret Code</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="new-client-code" placeholder="000000" maxlength="6"
+                            style="letter-spacing: 5px; font-weight: bold; text-align: center;">
+                        <button class="btn btn-secondary" id="btn-generate-code" title="Generate Random Code"><i
+                                class='bx bx-dice-5'></i></button>
+                    </div>
+                    <small class="text-muted mt-5 block">You will enter this code into the client's POS app.</small>
+                </div>
+                <div class="input-group mt-15">
+                    <label>Initial Status</label>
+                    <select id="new-client-status">
+                        <option value="active">Active (Unlocked)</option>
+                        <option value="inactive">Inactive (Locked)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal">Cancel</button>
+                <button class="btn btn-primary" id="btn-save-client">Save Client</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>GitHub Configuration</h2>
+                <button class="icon-btn close-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted mb-15">Configure the connection to your GitHub repository to securely manage the
+                    <code>clients.json</code> file.</p>
+                <div class="input-group">
+                    <label>GitHub Personal Access Token</label>
+                    <input type="password" id="config-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxx">
+                    <small class="text-muted mt-5 block">Requires `repo` scope to read/write files.</small>
+                </div>
+                <div class="input-group mt-15" style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label>Repository Owner</label>
+                        <input type="text" id="config-owner" placeholder="sehilinnovation" value="sehilinnovation">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Repository Name</label>
+                        <input type="text" id="config-repo" placeholder="mandhi-shop-licensing"
+                            value="mandhi-shop-licensing">
+                    </div>
+                </div>
+                <div class="input-group mt-15">
+                    <label>File Path</label>
+                    <input type="text" id="config-path" placeholder="clients.json" value="clients.json">
+                </div>
+            </div>
+            <div class="modal-footer" style="justify-content: space-between;">
+                <button class="btn btn-danger" id="btn-test-connection" style="background: var(--dark);">Test
+                    Connection</button>
+                <div>
+                    <button class="btn btn-secondary close-modal">Cancel</button>
+                    <button class="btn btn-primary" id="btn-save-config">Save Configuration</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

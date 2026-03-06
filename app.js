@@ -70,12 +70,17 @@ function init() {
 
 // GitHub API Fetch Helpers
 async function fetchFromGitHub() {
+    // Prevent fetching if token is empty to avoid generic network errors
+    if (!config.token || config.token.trim() === '') {
+        throw new Error("Configuration Missing: Please enter your GitHub Personal Access Token in Settings.");
+    }
+
     const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?t=${Date.now()}`;
 
     try {
         const response = await fetch(url, {
             headers: {
-                'Authorization': `Bearer ${config.token}`,
+                'Authorization': `token ${config.token}`,
                 'Accept': 'application/vnd.github.v3+json',
                 'Cache-Control': 'no-cache'
             }
@@ -85,14 +90,23 @@ async function fetchFromGitHub() {
             if (response.status === 404) {
                 throw new Error("clients.json file not found in repository.");
             }
+            if (response.status === 401) {
+                throw new Error("401 Unauthorized: Your token is invalid or has been revoked.");
+            }
             throw new Error(`GitHub API Error ${response.status}: ${response.statusText}`);
         }
 
         return await response.json();
     } catch (err) {
-        // Distinguish between browser "Failed to fetch" (network/CORS) and API errors
-        if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
-            throw new Error("Network Error: Could not connect to GitHub. This might be a CORS or Internet issue.");
+        // Check for specific browser-level network/CORS failure messages
+        const errMsg = err.message ? err.message.toLowerCase() : "";
+        const isNetworkError =
+            (err.name === 'TypeError') ||
+            errMsg.includes('networkerror') ||
+            errMsg.includes('failed to fetch');
+
+        if (isNetworkError && !errMsg.includes("unauthorized") && !errMsg.includes("not found")) {
+            throw new Error("Network/Security Error: Connection to GitHub was blocked. Please check your internet or disable Ad-blockers.");
         }
         throw err;
     }

@@ -28,7 +28,7 @@ const btnSaveClient = document.getElementById('btn-save-client');
 
 // Global State
 const DEFAULT_CONFIG = {
-    token: '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',
+    token: '',
     owner: 'sehilinnovation',
     repo: 'mandhi-shop-licensing',
     path: 'clients.json'

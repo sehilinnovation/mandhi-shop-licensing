@@ -19,6 +19,8 @@ const configPath = document.getElementById('config-path');
 const btnSaveConfig = document.getElementById('btn-save-config');
 const btnTestConnection = document.getElementById('btn-test-connection');
 const btnResetDashboard = document.getElementById('btn-reset-dashboard');
+const btnRunDiagnostic = document.getElementById('btn-run-diagnostic');
+const diagnosticResults = document.getElementById('diagnostic-results');
 
 // Add Client Elements
 const newClientName = document.getElementById('new-client-name');
@@ -454,4 +456,57 @@ function showToast(message, type = 'success') {
 }
 
 // Start
+btnRunDiagnostic.addEventListener('click', async () => {
+    diagnosticResults.innerHTML = '<p class="text-muted"><i class="bx bx-loader-alt bx-spin"></i> Running diagnostics...</p>';
+    btnRunDiagnostic.disabled = true;
+
+    let results = [];
+
+    // Test 1: Internet reachability
+    try {
+        await fetch('https://www.google.com', { mode: 'no-cors' });
+        results.push('<span style="color:#2ecc71;">✓</span> Internet connection OK.');
+    } catch (e) {
+        results.push('<span style="color:#e74c3c;">✗</span> Internet unreachable?');
+    }
+
+    // Test 2: GitHub API Reachability (No Auth)
+    try {
+        const res = await fetch('https://api.github.com/');
+        if (res.ok) results.push('<span style="color:#2ecc71;">✓</span> GitHub API reachable.');
+        else results.push(`<span style="color:#f1c40f;">?</span> GitHub API returned ${res.status}.`);
+    } catch (e) {
+        results.push('<span style="color:#e74c3c;">✗</span> GitHub API is BLOCKED by your browser/network.');
+    }
+
+    // Test 3: Token validation
+    const testToken = configToken.value.trim();
+    if (testToken) {
+        try {
+            const res = await fetch('https://api.github.com/user', {
+                headers: { 'Authorization': `Bearer ${testToken}` }
+            });
+            if (res.ok) results.push('<span style="color:#2ecc71;">✓</span> Token is VALID.');
+            else results.push(`<span style="color:#e74c3c;">✗</span> Token INVALID (Error ${res.status}).`);
+        } catch (e) {
+            results.push('<span style="color:#e74c3c;">✗</span> Browser BLOCKED the authenticated request (Security Block).');
+        }
+    } else {
+        results.push('<span style="color:#f1c40f;">!</span> No token entered to test.');
+    }
+
+    diagnosticResults.innerHTML = `<ul style="list-style:none; padding:0; margin:0;">${results.map(r => `<li style="margin-bottom:5px;">${r}</li>`).join('')}</ul>`;
+
+    // Add specific advice based on failures
+    if (results.some(r => r.includes('BLOCKED'))) {
+        diagnosticResults.innerHTML += `<div style="margin-top:10px; padding:10px; background:rgba(231,76,60,0.1); border-radius:4px; border:1px solid #e74c3c;">
+            <strong>Fix Found:</strong> Your browser is blocking the request. 
+            <br>1. Disable Firefox "Strict" Tracking Protection.
+            <br>2. Disable Ad-blockers (uBlock, etc).
+        </div>`;
+    }
+
+    btnRunDiagnostic.disabled = false;
+});
+
 init();

@@ -175,6 +175,18 @@
                     <label>File Path</label>
                     <input type="text" id="config-path" placeholder="clients.json" value="clients.json">
                 </div>
+
+                <!-- Diagnostic Tool -->
+                <div class="diagnostic-tool mt-20"
+                    style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                    <h4 style="margin-bottom: 10px; font-size: 14px; color: var(--text-muted);"><i
+                            class='bx bx-pulse'></i> Connection Diagnostic</h4>
+                    <div id="diagnostic-results" style="font-size: 13px;">
+                        <p class="text-muted italic">Click "Run Diagnostic" to check for browser blocks.</p>
+                    </div>
+                    <button class="btn btn-sm btn-outline mt-10" id="btn-run-diagnostic" style="width: 100%;">Run
+                        Diagnostic</button>
+                </div>
             </div>
             <div class="modal-footer" style="justify-content: space-between;">
                 <div style="display: flex; gap: 10px;">

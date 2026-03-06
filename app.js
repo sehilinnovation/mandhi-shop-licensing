@@ -18,6 +18,7 @@ const configRepo = document.getElementById('config-repo');
 const configPath = document.getElementById('config-path');
 const btnSaveConfig = document.getElementById('btn-save-config');
 const btnTestConnection = document.getElementById('btn-test-connection');
+const btnResetDashboard = document.getElementById('btn-reset-dashboard');
 
 // Add Client Elements
 const newClientName = document.getElementById('new-client-name');
@@ -329,6 +330,12 @@ btnSaveConfig.addEventListener('click', () => {
     fetchClients();
 });
 
+btnResetDashboard.addEventListener('click', () => {
+    if (!confirm('Are you sure you want to reset the dashboard? This will clear your saved token.')) return;
+    localStorage.clear();
+    location.reload();
+});
+
 btnTestConnection.addEventListener('click', async () => {
     const originalBtnText = btnTestConnection.innerHTML;
     btnTestConnection.disabled = true;
@@ -351,10 +358,11 @@ btnTestConnection.addEventListener('click', async () => {
             const user = await response.json();
             showToast(`Connection successful! Hello, ${user.login}.`, 'success');
         } else {
-            showToast('Invalid Token or insufficient permissions.', 'error');
+            const errData = await response.json().catch(() => ({}));
+            showToast(`Error: ${response.status} - ${errData.message || 'Invalid Token'}`, 'error');
         }
     } catch (e) {
-        showToast('Network error while testing connection.', 'error');
+        showToast(`Network Error: ${e.message}`, 'error');
     } finally {
         btnTestConnection.disabled = false;
         btnTestConnection.innerHTML = originalBtnText;

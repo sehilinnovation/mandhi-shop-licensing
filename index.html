@@ -153,7 +153,8 @@
             </div>
             <div class="modal-body">
                 <p class="text-muted mb-15">Configure the connection to your GitHub repository to securely manage the
-                    <code>clients.json</code> file.</p>
+                    <code>clients.json</code> file.
+                </p>
                 <div class="input-group">
                     <label>GitHub Personal Access Token</label>
                     <input type="password" id="config-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxx">
@@ -176,8 +177,13 @@
                 </div>
             </div>
             <div class="modal-footer" style="justify-content: space-between;">
-                <button class="btn btn-danger" id="btn-test-connection" style="background: var(--dark);">Test
-                    Connection</button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-danger" id="btn-test-connection" style="background: var(--dark);">Test
+                        Connection</button>
+                    <button class="btn btn-outline" id="btn-reset-dashboard"
+                        style="color: var(--danger); border-color: var(--danger);">Reset
+                        Defaults</button>
+                </div>
                 <div>
                     <button class="btn btn-secondary close-modal">Cancel</button>
                     <button class="btn btn-primary" id="btn-save-config">Save Configuration</button>

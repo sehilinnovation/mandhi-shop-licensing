@@ -1,0 +1,19 @@
+{
+  "clients": [
+    {
+      "name": "ABCTest",
+      "secretCode": "123456",
+      "status": "active"
+    },
+    {
+      "name": "Ramz Test",
+      "secretCode": "127345",
+      "status": "active"
+    },
+    {
+      "name": "Client Three",
+      "secretCode": "999888",
+      "status": "inactive"
+    }
+  ]
+}

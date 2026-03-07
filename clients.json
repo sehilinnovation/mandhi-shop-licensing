@@ -3,7 +3,7 @@
     {
       "name": "ABCTest",
       "secretCode": "123456",
-      "status": "active"
+      "status": "inactive"
     },
     {
       "name": "Ramz Test",

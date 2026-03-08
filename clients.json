@@ -3,17 +3,17 @@
     {
       "name": "ABCTest",
       "secretCode": "123456",
-      "status": "active"
+      "status": "inactive"
     },
     {
       "name": "Ramz Test",
       "secretCode": "127345",
-      "status": "active"
+      "status": "inactive"
     },
     {
       "name": "Client Three",
       "secretCode": "999888",
-      "status": "active"
+      "status": "inactive"
     }
   ]
 }

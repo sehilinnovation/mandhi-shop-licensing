@@ -6,7 +6,6 @@
       "status": "active",
       "tgBotToken": "8599967369:AAEBsYr-vwlP3uD5aDfFFPkWCpVG5kGiJwI",
       "tgChatId": "-1003813636744",
-      "backupToken": "dB3939STebexPEDysCEDXMibRWtouac2egr_phg",
       "backupGistId": "9897b57e1befb4f8b9bfb0bc0156471f"
     },
     {
@@ -15,7 +14,6 @@
       "status": "active",
       "tgBotToken": "987654321:BBHeXampleToken_AnotherToken",
       "tgChatId": "-100987654321, 12345678",
-      "backupToken": "ghp_PASTE_YOUR_GIST_TOKEN_HERE",
       "backupGistId": "PASTE_GIST_ID_FOR_RAMZ_TEST_HERE"
     },
     {
@@ -24,7 +22,6 @@
       "status": "active",
       "tgBotToken": "456123789:CCHeXampleToken_ThirdToken",
       "tgChatId": "87654321",
-      "backupToken": "ghp_PASTE_YOUR_GIST_TOKEN_HERE",
       "backupGistId": "PASTE_GIST_ID_FOR_CLIENT_3_HERE"
     }
   ]

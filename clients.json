@@ -1,25 +1,31 @@
 {
   "clients": [
     {
-      "name": "ABCTest",
+      "name": "Ramz Raydan",
       "secretCode": "123456",
       "status": "active",
       "tgBotToken": "8599967369:AAEBsYr-vwlP3uD5aDfFFPkWCpVG5kGiJwI",
-      "tgChatId": "-1003813636744"
+      "tgChatId": "-1003813636744",
+      "backupToken": "Z2hwX01qM0lONzExSXR1QlJmV1pRbTRac0plbXc1alJCMGRMQkxY",
+      "backupGistId": "9897b57e1befb4f8b9bfb0bc0156471f"
     },
     {
       "name": "Ramz Test",
       "secretCode": "127345",
       "status": "active",
       "tgBotToken": "987654321:BBHeXampleToken_AnotherToken",
-      "tgChatId": "-100987654321, 12345678"
+      "tgChatId": "-100987654321, 12345678",
+      "backupToken": "ghp_PASTE_YOUR_GIST_TOKEN_HERE",
+      "backupGistId": "PASTE_GIST_ID_FOR_RAMZ_TEST_HERE"
     },
     {
       "name": "Client Three",
       "secretCode": "999888",
       "status": "active",
       "tgBotToken": "456123789:CCHeXampleToken_ThirdToken",
-      "tgChatId": "87654321"
+      "tgChatId": "87654321",
+      "backupToken": "ghp_PASTE_YOUR_GIST_TOKEN_HERE",
+      "backupGistId": "PASTE_GIST_ID_FOR_CLIENT_3_HERE"
     }
   ]
 }

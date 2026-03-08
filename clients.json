@@ -13,7 +13,7 @@
     {
       "name": "Client Three",
       "secretCode": "999888",
-      "status": "inactive"
+      "status": "active"
     }
   ]
 }

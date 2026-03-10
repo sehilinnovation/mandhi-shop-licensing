@@ -17,12 +17,28 @@
       "backupGistId": "1132b4ba9e980f875c6001a48b0583a6"
     },
     {
-      "name": "Client Three",
-      "secretCode": "999888",
+      "name": "shopclient3",
+      "secretCode": "989745",
       "status": "active",
-      "tgBotToken": "456123789:CCHeXampleToken_ThirdToken",
-      "tgChatId": "87654321",
-      "backupGistId": "PASTE_GIST_ID_FOR_CLIENT_3_HERE"
+      "tgBotToken": "8757421643:AAEFHvgzARIGTnV_UwUHLFnm1y3EP8yJqLQ",
+      "tgChatId": "-1003861928605",
+      "backupGistId": "1132b4ba9e980f875c6001a48b0583a6"
+    },
+    {
+      "name": "shopclient4",
+      "secretCode": "675238",
+      "status": "active",
+      "tgBotToken": "8757421643:AAEFHvgzARIGTnV_UwUHLFnm1y3EP8yJqLQ",
+      "tgChatId": "-1003861928605",
+      "backupGistId": "1132b4ba9e980f875c6001a48b0583a6"
+    },
+    {
+      "name": "shopclient5",
+      "secretCode": "126534",
+      "status": "active",
+      "tgBotToken": "8757421643:AAEFHvgzARIGTnV_UwUHLFnm1y3EP8yJqLQ",
+      "tgChatId": "-1003861928605",
+      "backupGistId": "1132b4ba9e980f875c6001a48b0583a6"
     }
   ]
 }

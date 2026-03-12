@@ -17,16 +17,16 @@
       "backupGistId": "1132b4ba9e980f875c6001a48b0583a6"
     },
     {
-      "name": "shopclient3",
-      "secretCode": "989745",
+      "name": "client_1",
+      "secretCode": "482619",
       "status": "active",
-      "tgBotToken": "8757421643:AAEFHvgzARIGTnV_UwUHLFnm1y3EP8yJqLQ",
-      "tgChatId": "-1003861928605",
-      "backupGistId": "993c76f434220d3867d7e8d7bcea02e2"
+      "tgBotToken": "8576599017:AAHLQ1IJkbUgSWET9ATp_qX01AwpnT6J3aA",
+      "tgChatId": "-1005240444592",
+      "backupGistId": "8845fffc332a5d2b851207a8dfaf0755"
     },
     {
       "name": "shopclient4",
-      "secretCode": "675238",
+      "secretCode": "735241",
       "status": "active",
       "tgBotToken": "8757xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       "tgChatId": "-100xxxxxxxxxxxxx",
